@@ -1,0 +1,22 @@
+node_modules/
+dist/
+.DS_Store
+Thumbs.db
+.vite/
+.env
+.env.*
+!.env.example
+*.local
+*.log
+*.pem
+*.key
+coverage/
+.cache/
+.wrangler/
+
+# Local source assets kept outside the public release; published media lives in public/media.
+/*.gif
+/*.mp4
+/*.jpg
+/*.jpeg
+/*.webp

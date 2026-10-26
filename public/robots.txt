@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://phantom-protocol-afx.pages.dev/sitemap.xml
