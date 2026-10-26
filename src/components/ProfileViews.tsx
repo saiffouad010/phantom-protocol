@@ -58,9 +58,9 @@ export function ProfileViews() {
   if (count === null) return null;
 
   return (
-    <div className="mx-auto mt-4 inline-flex flex-col items-center gap-1.5 rounded-xl border border-white/8 bg-black/25 px-4 py-2 text-center shadow-[0_8px_24px_rgba(0,0,0,0.2)]" aria-label={`${count.toLocaleString()} profile views`}>
-      <span className="font-sans text-[11px] font-medium text-ink/90">Profile Views</span>
-      <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-semibold text-mute">
+    <div className="mt-5 flex items-center justify-center gap-2 text-center" aria-label={`${count.toLocaleString()} profile views`}>
+      <span className="font-sans text-[11px] font-medium text-white/70">Profile Views</span>
+      <span className="inline-flex items-center gap-1.5 font-sans text-[11px] font-semibold text-white/60">
         <Eye className="h-3.5 w-3.5" strokeWidth={2.4} aria-hidden="true" />
         {count.toLocaleString("en-US")}
       </span>

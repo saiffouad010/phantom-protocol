@@ -89,7 +89,7 @@ export function Atmosphere() {
       </div>
       <div className="absolute inset-0 bg-[#050506]/55" />
       <div className="vignette" />
-      <p className="pointer-events-none absolute top-[46%] left-1/2 w-[160vw] -translate-x-1/2 -translate-y-1/2 text-center font-display text-[18vw] font-semibold tracking-[-0.08em] text-white/[0.045] select-none">
+      <p className="pointer-events-none absolute top-[46%] left-1/2 w-[160vw] -translate-x-1/2 -translate-y-1/2 text-center font-display text-[18vw] font-semibold tracking-[-0.08em] text-white/[0.4] select-none">
         PHANTOM
       </p>
       <div className="grain" />

@@ -36,7 +36,7 @@ function LinkCard({ item, index, delay }: { item: FeaturedLink; index: number; d
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: delay + index * 0.07, duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
-      className="group relative flex items-center gap-3 overflow-hidden rounded-2xl border border-white/8 bg-white/[0.03] px-3.5 py-3 transition duration-300 hover:-translate-y-1 hover:border-crimson/45 hover:bg-white/[0.05] hover:shadow-[0_14px_30px_rgba(0,0,0,0.35),0_0_24px_rgba(164,22,26,0.18)]"
+      className="group relative flex items-center gap-3 overflow-hidden border-b border-white/10 px-1 py-3.5 transition duration-300 hover:border-crimson/55 hover:bg-white/[0.025]"
       onPointerMove={(event) => {
         const node = event.currentTarget;
         const rect = node.getBoundingClientRect();

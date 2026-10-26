@@ -43,7 +43,7 @@ export function ProfileCard({ ready }: { ready: boolean }) {
         <p className="mx-auto mt-4 max-w-[34ch] text-center text-[13.5px] leading-relaxed text-mute">
           {profile.bio}
         </p>
-        <p className="mt-4 flex items-center justify-center gap-2 font-mono text-[11px] tracking-[0.08em] text-ink/80">
+        <p className="mt-4 flex items-center justify-center gap-2 font-mono text-[11px] tracking-[0.04em] text-ink/80">
           <span className="status-dot h-1.5 w-1.5 rounded-full bg-signal" />
           {profile.status}
         </p>
