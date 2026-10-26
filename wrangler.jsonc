@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "phantom-protocol",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-10-26",
+  "kv_namespaces": [
+    {
+      "binding": "PHANTOM_VIEWS",
+      "id": "db3b6cdedde84ec6ab5c01e1d9b9b56f"
+    }
+  ]
+}

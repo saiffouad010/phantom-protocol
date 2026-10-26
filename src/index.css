@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-void: #050506;
+  --color-surface: #0d0d10;
+  --color-elevated: #151519;
+  --color-line: #29292f;
+  --color-ink: #f5f5f7;
+  --color-mute: #92929e;
+  --color-crimson: #e53935;
+  --color-ember: #a4161a;
+  --color-signal: #27c59a;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  background: #050506;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: #050506;
+  color: #f5f5f7;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid rgba(229, 57, 53, 0.85);
+  outline-offset: 3px;
+}
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  opacity: 0.055;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain {
+    display: none;
+  }
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  background:
+    radial-gradient(ellipse at center, transparent 42%, rgba(5, 5, 6, 0.55) 100%),
+    linear-gradient(180deg, rgba(5, 5, 6, 0.28) 0%, transparent 22%, transparent 70%, rgba(5, 5, 6, 0.72) 100%);
+}
+
+.card-glow {
+  background:
+    radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, 18%),
+      rgba(229, 57, 53, 0.12),
+      transparent 42%
+    );
+}
+
+.avatar-ring {
+  box-shadow:
+    0 0 0 2px rgba(229, 57, 53, 0.92),
+    0 0 0 7px rgba(5, 5, 6, 0.92),
+    0 0 28px rgba(164, 22, 26, 0.42);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .avatar-breathe {
+    animation: breathe 5.6s ease-in-out infinite;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 2px rgba(229, 57, 53, 0.78),
+      0 0 0 7px rgba(5, 5, 6, 0.92),
+      0 0 22px rgba(164, 22, 26, 0.32);
+  }
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(229, 57, 53, 1),
+      0 0 0 7px rgba(5, 5, 6, 0.92),
+      0 0 38px rgba(229, 57, 53, 0.42);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.86);
+  }
+}
+
+.status-dot {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-dot {
+    animation: none;
+  }
+}
+
+.glitch {
+  position: relative;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .glitch-active::before,
+  .glitch-active::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .glitch-active::before {
+    color: #e53935;
+    transform: translate(1px, -1px);
+    clip-path: inset(20% 0 45% 0);
+    opacity: 0.7;
+  }
+
+  .glitch-active::after {
+    color: #92929e;
+    transform: translate(-1px, 1px);
+    clip-path: inset(55% 0 10% 0);
+    opacity: 0.55;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050506;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #29292f;
+  border-radius: 99px;
+}
