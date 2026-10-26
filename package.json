@@ -11,7 +11,7 @@
     "test:counter": "node scripts/test-view-counter.mjs"
   },
   "dependencies": {
-    "lucide-react": "^0.544.0",
+    "lucide-react": "^1.61.0",
     "motion": "^12.23.22",
     "react": "^19.1.1",
     "react-dom": "^19.1.1"
