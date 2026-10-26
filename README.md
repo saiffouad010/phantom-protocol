@@ -27,6 +27,7 @@ Open `http://localhost:3000`.
 ```bash
 npm run build
 npm audit
+npm run test:counter
 npm run preview
 ```
 
@@ -36,7 +37,8 @@ The build runs TypeScript checking and creates the production output in `dist/`.
 
 - `src/config/profile.ts` — editable identity, About Me data, links, and media paths.
 - `src/components/` — profile, intro, About Me, social links, counter, and shared UI components.
-- `functions/api/views.js` — Cloudflare Pages Function for the privacy-conscious session-based view counter.
+- `functions/api/views.js` — Cloudflare Pages Function with read-only GET, intentional POST recording, and privacy-conscious session deduplication.
+- `scripts/test-view-counter.mjs` — focused tests for GET, POST, validation, and repeat-session behavior.
 - `public/media/` — optimized media used by the website.
 - `public/_headers` — Cloudflare response headers and caching rules.
 - `.github/workflows/ci.yml` — typecheck, build, and dependency audit.
@@ -56,7 +58,12 @@ npm run build
 npx wrangler pages deploy dist --project-name phantom-protocol --branch main
 ```
 
-Do not place Cloudflare API tokens in the repository. Use Wrangler login locally or protected CI secrets.
+Do not place Cloudflare API tokens in the repository. Use Wrangler login locally
+ or protected CI secrets.
+
+The view counter preserves the existing `profile-views` KV key. GET only reads;
+the browser records an eligible session through POST. KV is eventually consistent,
+so this remains an approximate metric rather than an exact concurrent counter.
 
 ## Security and public release
 
