@@ -30,6 +30,7 @@ The previous view counter mutated state through GET and used a Cloudflare KV rea
 - `npm run test:counter`: passed.
 - `npm audit --audit-level=high`: 0 vulnerabilities.
 - `npm run build`: passed.
+- Main-branch CI is currently passing. Dependabot PRs for major TypeScript, Vite, and Vite React plugin updates were inspected; the failed PRs were not merged because they require a coordinated toolchain migration.
 - Local `wrangler pages dev` served the page, API, CSP, and `nosniff` header.
 - GET did not increment the local counter.
 - First POST counted the session; repeated POST returned `counted: false`.
