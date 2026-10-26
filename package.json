@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:counter": "node scripts/test-view-counter.mjs"
   },
   "dependencies": {
     "lucide-react": "^0.544.0",

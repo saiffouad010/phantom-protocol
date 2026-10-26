@@ -1,30 +1,50 @@
 import { useEffect, useState } from "react";
 import { Eye } from "lucide-react";
 
-const SESSION_KEY = "phantom-profile-view-counted";
+const SESSION_KEY = "phantom-profile-view-token";
+
+function createSessionToken() {
+  return crypto.randomUUID();
+}
 
 export function ProfileViews() {
   const [count, setCount] = useState<number | null>(null);
 
   useEffect(() => {
     let active = true;
-    let countedThisSession = false;
-
+    let sessionToken: string | null;
     try {
-      countedThisSession = window.sessionStorage.getItem(SESSION_KEY) === "1";
-      if (!countedThisSession) window.sessionStorage.setItem(SESSION_KEY, "1");
+      sessionToken = window.sessionStorage.getItem(SESSION_KEY);
     } catch {
-      // The counter still works when browser storage is unavailable.
+      sessionToken = null;
     }
 
-    const mode = countedThisSession ? "?mode=read" : "";
-    fetch(`/api/views${mode}`, { cache: "no-store" })
+    const requestToken = sessionToken ?? createSessionToken();
+    const request = sessionToken
+      ? fetch("/api/views", { cache: "no-store" })
+      : fetch("/api/views", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ sessionToken: requestToken }),
+          cache: "no-store",
+        });
+
+    request
       .then((response) => {
         if (!response.ok) throw new Error("counter unavailable");
         return response.json() as Promise<{ count?: number }>;
       })
       .then((data) => {
-        if (active && typeof data.count === "number") setCount(data.count);
+        if (active && typeof data.count === "number") {
+          if (!sessionToken) {
+            try {
+              window.sessionStorage.setItem(SESSION_KEY, requestToken);
+            } catch {
+              // The server-side dedupe remains active for this request.
+            }
+          }
+          setCount(data.count);
+        }
       })
       .catch(() => {
         if (active) setCount(null);

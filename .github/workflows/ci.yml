@@ -23,5 +23,7 @@ jobs:
         run: npm ci
       - name: Audit dependencies
         run: npm audit --audit-level=high
+      - name: Test view counter
+        run: npm run test:counter
       - name: Typecheck and build
         run: npm run build
