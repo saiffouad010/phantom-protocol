@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { motion } from "motion/react";
+import { lazy, Suspense, useRef } from "react";
 import { profile } from "@/config/profile";
 import { ProfileHeader } from "@/components/ProfileHeader";
 import { IdentityBadges } from "@/components/IdentityBadges";
@@ -7,20 +6,20 @@ import { SocialLinks } from "@/components/SocialLinks";
 import { LinkCards } from "@/components/LinkCards";
 import { CopyLinkButton } from "@/components/CopyLinkButton";
 import { ProfileViews } from "@/components/ProfileViews";
-import { AboutModal } from "@/components/AboutModal";
 import { useMediaFlags } from "@/hooks/useMediaFlags";
 
-export function ProfileCard({ ready }: { ready: boolean }) {
+const LazyAboutModal = lazy(() =>
+  import("@/components/AboutModal").then(({ AboutModal }) => ({ default: AboutModal })),
+);
+
+export function ProfileCard() {
   const cardRef = useRef<HTMLElement>(null);
   const flags = useMediaFlags();
 
   return (
-    <motion.article
+    <article
       ref={cardRef}
       className="relative w-full max-w-[460px] overflow-hidden rounded-[28px] border border-white/10 bg-surface/72 shadow-[0_40px_90px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-2xl"
-      initial={flags.reducedMotion ? false : { opacity: 0, y: 28 }}
-      animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-      transition={{ type: "spring", stiffness: 120, damping: 20, delay: 0.05 }}
       onPointerMove={(event) => {
         if (flags.coarsePointer) return;
         const node = cardRef.current;
@@ -55,8 +54,10 @@ export function ProfileCard({ ready }: { ready: boolean }) {
         <LinkCards />
         <CopyLinkButton />
         <ProfileViews />
-        <AboutModal />
+        <Suspense fallback={null}>
+          <LazyAboutModal />
+        </Suspense>
       </div>
-    </motion.article>
+    </article>
   );
 }

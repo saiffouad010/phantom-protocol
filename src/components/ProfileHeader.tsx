@@ -8,6 +8,10 @@ export function ProfileHeader() {
         <img
           src={profile.media.banner}
           alt=""
+          width={486}
+          height={275}
+          fetchPriority="high"
+          decoding="async"
           className="h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-surface via-void/25 to-void/35" />

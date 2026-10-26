@@ -1,20 +1,16 @@
-import { motion } from "motion/react";
 import { configuredSocialLinks } from "@/config/profile";
 import { SocialGlyph } from "@/components/icons";
 import { Magnetic } from "@/components/Magnetic";
 
-export function SocialLinks({ delay = 0.45 }: { delay?: number }) {
+export function SocialLinks() {
   const links = configuredSocialLinks();
   if (links.length === 0) return null;
 
   return (
     <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
-      {links.map((link, index) => (
-        <motion.div
+      {links.map((link) => (
+        <div
           key={link.id}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: delay + index * 0.05, duration: 0.32 }}
         >
           <Magnetic>
             <a
@@ -31,7 +27,7 @@ export function SocialLinks({ delay = 0.45 }: { delay?: number }) {
               </span>
             </a>
           </Magnetic>
-        </motion.div>
+        </div>
       ))}
     </div>
   );

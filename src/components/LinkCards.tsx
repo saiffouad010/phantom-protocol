@@ -1,5 +1,4 @@
 import { ArrowUpRight } from "lucide-react";
-import { motion } from "motion/react";
 import { configuredFeaturedLinks, type FeaturedLink } from "@/config/profile";
 import { featuredIsSocial, SocialGlyph } from "@/components/icons";
 
@@ -9,6 +8,8 @@ function CardIcon({ item }: { item: FeaturedLink }) {
       <img
         src={item.iconAsset}
         alt=""
+        loading="lazy"
+        decoding="async"
         className="h-10 w-10 rounded-xl object-cover"
       />
     );
@@ -27,15 +28,12 @@ function CardIcon({ item }: { item: FeaturedLink }) {
   );
 }
 
-function LinkCard({ item, index, delay }: { item: FeaturedLink; index: number; delay: number }) {
+function LinkCard({ item }: { item: FeaturedLink }) {
   return (
-    <motion.a
+    <a
       href={item.href}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: delay + index * 0.07, duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
       className="group relative flex items-center gap-3 overflow-hidden border-b border-white/10 px-1 py-3.5 transition duration-300 hover:border-crimson/55 hover:bg-white/[0.025]"
       onPointerMove={(event) => {
         const node = event.currentTarget;
@@ -61,18 +59,18 @@ function LinkCard({ item, index, delay }: { item: FeaturedLink; index: number; d
         </span>
       </span>
       <ArrowUpRight className="relative h-4 w-4 shrink-0 text-mute transition duration-300 group-hover:text-crimson" />
-    </motion.a>
+    </a>
   );
 }
 
-export function LinkCards({ delay = 0.55 }: { delay?: number }) {
+export function LinkCards() {
   const links = configuredFeaturedLinks();
   if (links.length === 0) return null;
 
   return (
     <div className="mt-5 grid gap-2">
-      {links.map((item, index) => (
-        <LinkCard key={item.id} item={item} index={index} delay={delay} />
+      {links.map((item) => (
+        <LinkCard key={item.id} item={item} />
       ))}
     </div>
   );

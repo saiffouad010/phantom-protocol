@@ -47,10 +47,14 @@ export function Atmosphere() {
     };
 
     video.addEventListener("ended", fadeOut);
-    void video.play().catch(() => fadeOut());
+    const timer = window.setTimeout(() => {
+      video.load();
+      void video.play().catch(() => fadeOut());
+    }, 1200);
 
     return () => {
       video.removeEventListener("ended", fadeOut);
+      window.clearTimeout(timer);
       video.pause();
     };
   }, [canVideo]);
@@ -73,7 +77,7 @@ export function Atmosphere() {
             className="absolute inset-0 h-full w-full object-cover opacity-40 mix-blend-screen transition-opacity duration-[1800ms] ease-out"
             muted
             playsInline
-            preload="metadata"
+            preload="none"
             poster={profile.media.poster}
           >
             <source src={profile.media.video} type="video/mp4" />

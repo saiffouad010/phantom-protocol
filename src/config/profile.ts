@@ -55,7 +55,7 @@ export const profile = {
     credentialsUrl: "https://www.credential.net/profile/saiffottuh434602/wallet",
   },
   media: {
-    avatar: "/media/avatar.webp",
+    avatar: "/media/avatar-256.webp",
     banner: "/media/banner.webp",
     background: "/media/background.webp",
     poster: "/media/poster.webp",

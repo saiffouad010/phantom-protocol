@@ -2,16 +2,19 @@
  * PHANTOM PROTOCOL
  * Developed by ENG - SAIF
  */
-import { useCallback, useState } from "react";
+import { lazy, Suspense, useCallback, useState } from "react";
 import { Atmosphere } from "@/components/Atmosphere";
-import { IntroOverlay } from "@/components/IntroOverlay";
 import { ProfileCard } from "@/components/ProfileCard";
 import { Footer } from "@/components/Footer";
 import { useMediaFlags } from "@/hooks/useMediaFlags";
 
+const LazyIntroOverlay = lazy(() =>
+  import("@/components/IntroOverlay").then(({ IntroOverlay }) => ({ default: IntroOverlay })),
+);
+
 export function App() {
   const flags = useMediaFlags();
-  const [entered, setEntered] = useState(flags.reducedMotion);
+  const [, setEntered] = useState(true);
   const [replayKey, setReplayKey] = useState(0);
   const handleComplete = useCallback(() => setEntered(true), []);
   const replayIntro = useCallback(() => {
@@ -22,9 +25,11 @@ export function App() {
   return (
     <div className="relative min-h-dvh">
       <Atmosphere />
-      <IntroOverlay key={replayKey} replayKey={replayKey} reducedMotion={flags.reducedMotion} onComplete={handleComplete} />
+      <Suspense fallback={null}>
+        <LazyIntroOverlay key={replayKey} replayKey={replayKey} reducedMotion={flags.reducedMotion} onComplete={handleComplete} />
+      </Suspense>
       <main className="relative z-10 flex min-h-dvh flex-col items-center justify-center px-4 py-10">
-        <ProfileCard ready={entered} />
+        <ProfileCard />
         <Footer onReplayIntro={replayIntro} />
       </main>
     </div>
